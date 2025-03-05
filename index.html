@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: rgb(192, 192, 192);
+            opacity: 1; /* Firefox */
+        }
+
+    </style>
+</head>
+<body style="color: white; font-weight: 600;background: rgb(58, 58, 58);">
+    <!-- section 1 start  -->
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center text-info pt-4"> 
+                    <h1>Billing Software</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section 2 start  -->
+    <section>
+        <fieldset>
+            <legend class="text-info">Customer Information</legend>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-4">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" id="name1" autocomplete="off" onkeyup="getDate()" placeholder="First Name">
+                            </div>
+                            <div class="col-4">
+                                <label>Middle Name</label>
+                                <input type="text" class="form-control" id="name1" autocomplete="off" onkeyup="getDate()" placeholder="Middle Name">
+                            </div>
+                            <div class="col-4">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" id="name1" autocomplete="off" onkeyup="getDate()" placeholder="Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Mobile Number</label>
+                        <input type="number" class="form-control" id="mobile1" autocomplete="off">
+                    </div>
+                    <div class="col-md-1">
+                        <label>Prev Dues</label>
+                        <input type="number" class="form-control" id="prev1" autocomplete="off">
+                    </div>
+                    <div class="col-md-2">
+                        <label>Invoice No</label>
+                        <input type="text" class="form-control" value="123456789123456" id="invno1" autocomplete="off" readonly>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Invoice Date</label>
+                        <input type="date" onload="getDate()" class="form-control" id="invdate1" name="date" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </section>
+
+     <!-- section 3 start  -->
+    <section>
+        <fieldset>
+            <legend class="text-info pt-2">Product Information</legend>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-dark text-center">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Product Size</th>
+                                    <th>Product Rate</th>
+                                    <th>Product Quantity</th>
+                                    <th>Product Tax(%)</th>
+                                    <th>Product Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                <tr>
+                                    <td>
+                                        <input type="text" autocomplete="off" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input type="text" autocomplete="off" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input type="number" autocomplete="off" class="form-control" id="rate">
+                                    </td>
+                                    <td>
+                                        <input type="number" autocomplete="off" class="form-control" id="qnt">
+                                    </td>
+                                    <td>
+                                        <input type="number" autocomplete="off" class="form-control" id="tax">
+                                    </td>
+                                    <td>
+                                        <input type="number" autocomplete="off" readonly class="form-control totamt1" id="total">
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6" class="text-start">
+                                        <button class="btn btn-primary" id="addmore">Add More</button>
+                                        <span id="rowcount" style="padding-left: 12px;"></span>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </section>
+
+    <!-- section 4 start -->
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Total Amount</label>
+                    <input type="number" autocomplete="off" readonly class="form-control totalamount" id="totalamount">
+                </div>
+                <div class="col-md-2">
+                    <label>Total Discount(%)</label>
+                    <input type="number" autocomplete="off" class="form-control" id="totaldiscount11"> 
+                </div>
+                <div class="col-md-2">
+                    <label>Net Total</label>
+                    <input type="number" autocomplete="off" readonly class="form-control" id="nettotalamount">
+                </div>
+                <div class="col-md-2">
+                    <label>Paid Amount</label>
+                    <input type="number" autocomplete="off" class="form-control" id="paidamount">
+                </div>
+                <div class="col-md-2">
+                    <label>Paid Type</label>
+                    <select class="form-control form-select">
+                        <option>Cash</option>
+                        <option>Online</option>
+                        <option>Debit / Credit Card</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label>Due Amount</label>
+                    <input type="number" autocomplete="off" readonly class="form-control" id="dueamount">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center mt-5">
+                    <button class="btn btn-secondary" style="font-weight: 900;font-size: 15px; color: lightgrey; margin:10px;" onclick="getDate()" title="Add New Customer">Cancle</button>
+                    <button class="btn btn-secondary" style="font-weight: 900;font-size: 15px; color: lightgrey; margin:10px;" onclick="getDate()" title="Add New Customer">Clear</button>
+                    <button class="btn btn-primary" style="font-weight: 900;font-size: 15px; margin:10px;" onclick="getDate()" title="Add New Customer">Save</button>
+                    <!-- data-bs-toggle="modal" data-bs-target="#exampleModal" -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section 5 start  -->
+    <section>
+            <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="color: rgb(70, 70, 70);">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Customer</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="tbody">
+                        <div class="row">
+                            <div class="col-12">
+                                <label>Customer Full Name</label>
+                                <input type="text" autocomplete="off" class="form-control" id="name">
+                            </div>
+                            <div class="col-12">
+                                <label>Customer Mobile</label>
+                                <input type="text" autocomplete="off" class="form-control" id="mobile">
+                            </div>
+                            <div class="col-12">
+                                <label>Previous Deu</label>
+                                <input type="text" autocomplete="off" class="form-control" id="prev">
+                            </div>
+                            <div class="col-12">
+                                <label>Invoice Number</label>
+                                <input type="text" autocomplete="off" value="123456789123456" class="form-control" id="invno" readonly>
+                            </div>
+                            <div class="col-12">
+                                <label>Invoice Date</label>
+                                <input type="date" autocomplete="off" class="form-control" id="invdate" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="modalsave">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- javascript Start  -->
+     <script>
+        $(document).ready(function(){
+            $("#modalsave").click(function(){
+                // get 
+                var name=$("#name").val()
+                var mobile=$("#mobile").val()
+                var prev=$("#prev").val()
+                var invno=$("#invno").val()
+                var invdate=$("#invdate").val()
+                // set 
+                $("#name1").val(name)
+                $("#mobile1").val(mobile)
+                $("#prev1").val(prev)
+                $("#invno1").val(invno)
+                $("#invdate1").val(invdate)
+
+                $('#exampleModal').modal('hide');
+            })
+            $("#rate , #qnt , #tax").keyup(function(){
+                var rate=$("#rate").val()
+                var qnt=$("#qnt").val()
+                var tot=Number(rate)*Number(qnt);
+                var tax=$("#tax").val()
+                var taxtot=Number(tot)*Number(tax)/100;
+                var nettot=tot+taxtot;
+                $("#total").val(nettot);
+
+                nettotxyz()
+            })
+            $("#addmore").click(function(){
+                var rowCount = $('#tbody tr').length;
+                var ra="rate"+rowCount 
+                var qn="qnt"+rowCount 
+                var tx="tax"+rowCount  
+                var to="total"+rowCount 
+                var dataa='<tr><td><input type="text" autocomplete="off" class="form-control"></td><td><input type="text" autocomplete="off" class="form-control"></td><td><input type="text" autocomplete="off" class="form-control" id="'+ra+'" onkeyup="cal('+ra+','+qn+','+tx+','+to+')"></td><td><input type="text" autocomplete="off" class="form-control" id="'+qn+'"onkeyup="cal('+ra+','+qn+','+tx+','+to+')"></td><td><input type="text" autocomplete="off" class="form-control" id="'+tx+'"onkeyup="cal('+ra+','+qn+','+tx+','+to+')"></td><td><input type="text" autocomplete="off" class="form-control totamt1" id="'+to+'"></td></tr>';
+                $("#tbody").append(dataa)
+            })
+        })
+        function cal(ra1,qn1,tx1,to1){
+            var ra11=ra1.value
+            var qn11=qn1.value
+            var tx11=tx1.value
+            var tot111=Number(ra11)*Number(qn11)
+            var tottax111=Number(tot111)*Number(tx11)/100;
+            var tot123=tot111+tottax111;
+
+            to1.value=tot123;
+
+            nettotxyz()
+        }
+        function nettotxyz(){
+            var ab=document.getElementsByClassName("totamt1");
+            var sum=0;
+            for(var i=0;i<ab.length;i++){
+                sum+=Number(ab[i].value)
+            }
+            $("#totalamount").val(sum)
+            $("#nettotalamount").val(sum)
+        }
+
+        $(document).ready(function(){
+            $("#totaldiscount11").keyup(function(){
+                var abc=$(".totalamount").val()
+                var def=$("#totaldiscount11").val()
+                var ghi=abc*def/100
+                var jkl=abc-ghi
+                $("#nettotalamount").val(jkl)
+            })
+            $("#paidamount").keyup(function(){
+                var mno=$("#nettotalamount").val()
+                var pqr=$("#paidamount").val()
+                var stu=mno-pqr
+                $("#dueamount").val(stu)
+            })
+            $("#addmore").click(function(){
+                var rowCount = $('#tbody tr').length;
+                $("#rowcount").html("Row Count: "+rowCount)
+            })
+        })
+        function getDate(){
+            var today = new Date();
+            document.getElementById("invdate1").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+            document.getElementById("invdate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2); 
+        }
+     </script>
+     <script src="cdn/jquery-3.7.1.js"></script>
+     <script src="cdn/jquery-3.7.1.min.js"></script>
+     <script src="cdn/jquery-3.7.1.slim.js"></script>
+     <script src="cdn/jquery-3.7.1.slim.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+</html>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ab8b3e33c.js" crossorigin="anonymous"></script> -->
