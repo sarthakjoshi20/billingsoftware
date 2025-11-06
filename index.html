@@ -3,26 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Billing Software</title>
+    <title>Professional Billing Software</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+        }
+        
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+            -webkit-appearance: none;
+            margin: 0;
         }
-        .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color: rgb(192, 192, 192);
-            opacity: 1; /* Firefox */
+        
+        .form-control::placeholder {
+            color: #adb5bd;
+            opacity: 1;
         }
         
         body {
-            color: white; 
-            font-weight: 600;
-            background: rgb(58, 58, 58);
+            color: var(--primary-color);
+            font-weight: 500;
+            background: var(--light-bg);
             padding-bottom: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         section {
@@ -30,40 +42,129 @@
         }
         
         fieldset {
-            border: 1px solid #0dcaf0;
+            border: 1px solid #dee2e6;
             border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         
         legend {
             width: auto;
-            padding: 0 10px;
+            padding: 0 15px;
             margin-bottom: 0;
             font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            border-bottom: none;
         }
         
         .table-responsive {
             border-radius: 8px;
             overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         
-        .table-dark {
-            background-color: #424649;
+        .table thead {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .table tbody tr:nth-child(even) {
+            background-color: rgba(0,0,0,0.02);
+        }
+        
+        .table tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
         }
         
         .btn-primary {
-            background-color: #0d6efd;
-            border-color: #0d6efd;
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
         }
         
-        .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
+        .btn-success {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-color);
+            border-color: var(--warning-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-danger {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
         }
         
         .modal-content {
-            color: rgb(70, 70, 70);
+            color: var(--primary-color);
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .summary-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+        
+        .summary-card label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        
+        .summary-card input, .summary-card select {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        /* Print-specific styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #print-section, #print-section * {
+                visibility: visible;
+            }
+            #print-section {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .table {
+                border-collapse: collapse;
+            }
+            .table th, .table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+            .table thead {
+                background-color: #f2f2f2;
+            }
         }
         
         /* Responsive adjustments */
@@ -83,7 +184,7 @@
             
             .table tr {
                 margin-bottom: 15px;
-                border: 1px solid #495057;
+                border: 1px solid #dee2e6;
                 border-radius: 5px;
                 padding: 10px;
             }
@@ -104,20 +205,16 @@
                 white-space: nowrap;
                 text-align: left;
                 font-weight: bold;
+                color: var(--primary-color);
             }
             
             .table input {
                 width: 100%;
             }
             
-            .btn {
+            .action-buttons .btn {
                 width: 100%;
                 margin-bottom: 10px;
-            }
-            
-            .text-center .btn {
-                width: auto;
-                margin: 5px;
             }
         }
         
@@ -126,7 +223,7 @@
                 margin-bottom: 10px;
             }
             
-            .text-center .btn {
+            .action-buttons .btn {
                 width: 100%;
                 margin: 5px 0;
             }
@@ -134,69 +231,70 @@
     </style>
 </head>
 <body>
-    <!-- section 1 start  -->
-    <section>
+    <!-- Header section -->
+    <section class="header-section">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 text-center text-info pt-4"> 
-                    <h1>Billing Software</h1>
+                <div class="col-md-12 text-center">
+                    <h1>Professional Billing Software</h1>
+                    <p class="mb-0">Create and manage invoices efficiently</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- section 2 start  -->
+    <!-- Customer Information section -->
     <section>
         <fieldset>
-            <legend class="text-info">Customer Information</legend>
+            <legend>Customer Information</legend>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-5">
                         <div class="row">
                             <div class="col-md-4 col-sm-4 col-12 mb-2">
                                 <label>First Name</label>
-                                <input type="text" class="form-control" id="name1" autocomplete="off" onkeyup="getDate()" placeholder="First Name">
+                                <input type="text" class="form-control" id="firstName" autocomplete="off" placeholder="First Name">
                             </div>
                             <div class="col-md-4 col-sm-4 col-12 mb-2">
                                 <label>Middle Name</label>
-                                <input type="text" class="form-control" id="name1" autocomplete="off" onkeyup="getDate()" placeholder="Middle Name">
+                                <input type="text" class="form-control" id="middleName" autocomplete="off" placeholder="Middle Name">
                             </div>
                             <div class="col-md-4 col-sm-4 col-12 mb-2">
                                 <label>Last Name</label>
-                                <input type="text" class="form-control" id="name1" autocomplete="off" onkeyup="getDate()" placeholder="Last Name">
+                                <input type="text" class="form-control" id="lastName" autocomplete="off" placeholder="Last Name">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-6 col-12 mb-2">
                         <label>Mobile Number</label>
-                        <input type="number" class="form-control" id="mobile1" autocomplete="off">
+                        <input type="number" class="form-control" id="mobileNumber" autocomplete="off">
                     </div>
                     <div class="col-md-1 col-sm-3 col-6 mb-2">
                         <label>Prev Dues</label>
-                        <input type="number" class="form-control" id="prev1" autocomplete="off">
+                        <input type="number" class="form-control" id="previousDues" autocomplete="off">
                     </div>
                     <div class="col-md-2 col-sm-6 col-12 mb-2">
                         <label>Invoice No</label>
-                        <input type="text" class="form-control" value="123456789123456" id="invno1" autocomplete="off" readonly>
+                        <input type="text" class="form-control" value="INV-2023-001" id="invoiceNumber" autocomplete="off" readonly>
                     </div>
                     <div class="col-md-2 col-sm-6 col-12 mb-2">
                         <label>Invoice Date</label>
-                        <input type="date" onload="getDate()" class="form-control" id="invdate1" name="date" autocomplete="off">
+                        <input type="date" class="form-control" id="invoiceDate" name="date" autocomplete="off">
                     </div>
                 </div>
             </div>
         </fieldset>
     </section>
 
-     <!-- section 3 start  -->
+    <!-- Product Information section -->
     <section>
         <fieldset>
-            <legend class="text-info pt-2">Product Information</legend>
+            <legend>Product Information</legend>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-dark text-center">
+                            <table class="table table-bordered text-center">
                                 <thead>
                                     <tr>
                                         <th>Product Name</th>
@@ -205,35 +303,39 @@
                                         <th>Product Quantity</th>
                                         <th>Product Tax(%)</th>
                                         <th>Product Total</th>
+                                        <th class="no-print">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tbody">
+                                <tbody id="productTableBody">
                                     <tr>
                                         <td data-label="Product Name">
-                                            <input type="text" autocomplete="off" class="form-control">
+                                            <input type="text" autocomplete="off" class="form-control" placeholder="Product name">
                                         </td>
                                         <td data-label="Product Size">
-                                            <input type="text" autocomplete="off" class="form-control">
+                                            <input type="text" autocomplete="off" class="form-control" placeholder="Size">
                                         </td>
                                         <td data-label="Product Rate">
-                                            <input type="number" autocomplete="off" class="form-control" id="rate">
+                                            <input type="number" autocomplete="off" class="form-control product-rate" placeholder="0.00">
                                         </td>
                                         <td data-label="Product Quantity">
-                                            <input type="number" autocomplete="off" class="form-control" id="qnt">
+                                            <input type="number" autocomplete="off" class="form-control product-quantity" placeholder="0">
                                         </td>
                                         <td data-label="Product Tax(%)">
-                                            <input type="number" autocomplete="off" class="form-control" id="tax">
+                                            <input type="number" autocomplete="off" class="form-control product-tax" placeholder="0">
                                         </td>
                                         <td data-label="Product Total">
-                                            <input type="number" autocomplete="off" readonly class="form-control totamt1" id="total">
+                                            <input type="number" autocomplete="off" readonly class="form-control product-total" placeholder="0.00">
+                                        </td>
+                                        <td data-label="Action" class="no-print">
+                                            <button class="btn btn-sm btn-danger remove-row">Remove</button>
                                         </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="6" class="text-start">
-                                            <button class="btn btn-primary" id="addmore">Add More</button>
-                                            <span id="rowcount" style="padding-left: 12px;"></span>
+                                        <td colspan="7" class="text-start no-print">
+                                            <button class="btn btn-primary" id="addRow">Add Product</button>
+                                            <span id="rowCount" style="padding-left: 12px;"></span>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -245,182 +347,380 @@
         </fieldset>
     </section>
 
-    <!-- section 4 start -->
+    <!-- Summary section -->
     <section>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 col-sm-4 col-6 mb-2">
-                    <label>Total Amount</label>
-                    <input type="number" autocomplete="off" readonly class="form-control totalamount" id="totalamount">
+                    <div class="summary-card">
+                        <label>Total Amount</label>
+                        <input type="number" autocomplete="off" readonly class="form-control" id="totalAmount">
+                    </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-6 mb-2">
-                    <label>Total Discount(%)</label>
-                    <input type="number" autocomplete="off" class="form-control" id="totaldiscount11"> 
+                    <div class="summary-card">
+                        <label>Total Discount(%)</label>
+                        <input type="number" autocomplete="off" class="form-control" id="totalDiscount"> 
+                    </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-6 mb-2">
-                    <label>Net Total</label>
-                    <input type="number" autocomplete="off" readonly class="form-control" id="nettotalamount">
+                    <div class="summary-card">
+                        <label>Net Total</label>
+                        <input type="number" autocomplete="off" readonly class="form-control" id="netTotalAmount">
+                    </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-6 mb-2">
-                    <label>Paid Amount</label>
-                    <input type="number" autocomplete="off" class="form-control" id="paidamount">
+                    <div class="summary-card">
+                        <label>Paid Amount</label>
+                        <input type="number" autocomplete="off" class="form-control" id="paidAmount">
+                    </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-6 mb-2">
-                    <label>Paid Type</label>
-                    <select class="form-control form-select">
-                        <option>Cash</option>
-                        <option>Online</option>
-                        <option>Debit / Credit Card</option>
-                    </select>
+                    <div class="summary-card">
+                        <label>Paid Type</label>
+                        <select class="form-control form-select" id="paymentType">
+                            <option>Cash</option>
+                            <option>Online</option>
+                            <option>Debit / Credit Card</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-6 mb-2">
-                    <label>Due Amount</label>
-                    <input type="number" autocomplete="off" readonly class="form-control" id="dueamount">
+                    <div class="summary-card">
+                        <label>Due Amount</label>
+                        <input type="number" autocomplete="off" readonly class="form-control" id="dueAmount">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Action buttons section -->
     <section>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 text-center mt-5">
-                    <button class="btn btn-secondary" style="font-weight: 900;font-size: 15px; color: lightgrey; margin:10px;" onclick="getDate()" title="Add New Customer">Cancel</button>
-                    <button class="btn btn-secondary" style="font-weight: 900;font-size: 15px; color: lightgrey; margin:10px;" onclick="getDate()" title="Add New Customer">Clear</button>
-                    <button class="btn btn-primary" style="font-weight: 900;font-size: 15px; margin:10px;" onclick="getDate()" title="Add New Customer">Save</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- section 5 start  -->
-    <section>
-            <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Customer</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="tbody">
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                <label>Customer Full Name</label>
-                                <input type="text" autocomplete="off" class="form-control" id="name">
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label>Customer Mobile</label>
-                                <input type="text" autocomplete="off" class="form-control" id="mobile">
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label>Previous Due</label>
-                                <input type="text" autocomplete="off" class="form-control" id="prev">
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label>Invoice Number</label>
-                                <input type="text" autocomplete="off" value="123456789123456" class="form-control" id="invno" readonly>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label>Invoice Date</label>
-                                <input type="date" autocomplete="off" class="form-control" id="invdate" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="modalsave">Save changes</button>
+                <div class="col-md-12 text-center mt-4">
+                    <div class="action-buttons no-print">
+                        <button class="btn btn-warning" onclick="resetForm()">Clear</button>
+                        <button class="btn btn-secondary" onclick="saveInvoice()">Save</button>
+                        <button class="btn btn-success" onclick="printInvoice()">Print Invoice</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- javascript Start  -->
-     <script>
+    <!-- Print section (hidden until printing) -->
+    <section id="print-section" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h2>INVOICE</h2>
+                    <p id="printInvoiceNumber"></p>
+                    <p id="printInvoiceDate"></p>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    <h5>Bill To:</h5>
+                    <p id="printCustomerName"></p>
+                    <p id="printCustomerMobile"></p>
+                </div>
+                <div class="col-6 text-end">
+                    <h5>Invoice Details:</h5>
+                    <p id="printInvoiceDetails"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Size</th>
+                                <th>Rate</th>
+                                <th>Qty</th>
+                                <th>Tax(%)</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="printProductTable">
+                            <!-- Product rows will be inserted here -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" class="text-end"><strong>Total Amount:</strong></td>
+                                <td id="printTotalAmount"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-end"><strong>Discount:</strong></td>
+                                <td id="printDiscount"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-end"><strong>Net Total:</strong></td>
+                                <td id="printNetTotal"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-end"><strong>Paid Amount:</strong></td>
+                                <td id="printPaidAmount"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-end"><strong>Due Amount:</strong></td>
+                                <td id="printDueAmount"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p>Thank you for your business!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
         $(document).ready(function(){
-            $("#modalsave").click(function(){
-                // get 
-                var name=$("#name").val()
-                var mobile=$("#mobile").val()
-                var prev=$("#prev").val()
-                var invno=$("#invno").val()
-                var invdate=$("#invdate").val()
-                // set 
-                $("#name1").val(name)
-                $("#mobile1").val(mobile)
-                $("#prev1").val(prev)
-                $("#invno1").val(invno)
-                $("#invdate1").val(invdate)
-
-                $('#exampleModal').modal('hide');
-            })
-            $("#rate , #qnt , #tax").keyup(function(){
-                var rate=$("#rate").val()
-                var qnt=$("#qnt").val()
-                var tot=Number(rate)*Number(qnt);
-                var tax=$("#tax").val()
-                var taxtot=Number(tot)*Number(tax)/100;
-                var nettot=tot+taxtot;
-                $("#total").val(nettot);
-
-                nettotxyz()
-            })
-            $("#addmore").click(function(){
-                var rowCount = $('#tbody tr').length;
-                var ra="rate"+rowCount 
-                var qn="qnt"+rowCount 
-                var tx="tax"+rowCount  
-                var to="total"+rowCount 
-                var dataa='<tr><td data-label="Product Name"><input type="text" autocomplete="off" class="form-control"></td><td data-label="Product Size"><input type="text" autocomplete="off" class="form-control"></td><td data-label="Product Rate"><input type="text" autocomplete="off" class="form-control" id="'+ra+'" onkeyup="cal('+ra+','+qn+','+tx+','+to+')"></td><td data-label="Product Quantity"><input type="text" autocomplete="off" class="form-control" id="'+qn+'"onkeyup="cal('+ra+','+qn+','+tx+','+to+')"></td><td data-label="Product Tax(%)"><input type="text" autocomplete="off" class="form-control" id="'+tx+'"onkeyup="cal('+ra+','+qn+','+tx+','+to+')"></td><td data-label="Product Total"><input type="text" autocomplete="off" class="form-control totamt1" id="'+to+'"></td></tr>';
-                $("#tbody").append(dataa)
-            })
-        })
-        function cal(ra1,qn1,tx1,to1){
-            var ra11=ra1.value
-            var qn11=qn1.value
-            var tx11=tx1.value
-            var tot111=Number(ra11)*Number(qn11)
-            var tottax111=Number(tot111)*Number(tx11)/100;
-            var tot123=tot111+tottax111;
-
-            to1.value=tot123;
-
-            nettotxyz()
-        }
-        function nettotxyz(){
-            var ab=document.getElementsByClassName("totamt1");
-            var sum=0;
-            for(var i=0;i<ab.length;i++){
-                sum+=Number(ab[i].value)
-            }
-            $("#totalamount").val(sum)
-            $("#nettotalamount").val(sum)
-        }
-
-        $(document).ready(function(){
-            $("#totaldiscount11").keyup(function(){
-                var abc=$(".totalamount").val()
-                var def=$("#totaldiscount11").val()
-                var ghi=abc*def/100
-                var jkl=abc-ghi
-                $("#nettotalamount").val(jkl)
-            })
-            $("#paidamount").keyup(function(){
-                var mno=$("#nettotalamount").val()
-                var pqr=$("#paidamount").val()
-                var stu=mno-pqr
-                $("#dueamount").val(stu)
-            })
-            $("#addmore").click(function(){
-                var rowCount = $('#tbody tr').length;
-                $("#rowcount").html("Row Count: "+rowCount)
-            })
-        })
-        function getDate(){
+            // Set current date
+            setCurrentDate();
+            
+            // Add row functionality
+            $("#addRow").click(function(){
+                addProductRow();
+            });
+            
+            // Remove row functionality
+            $(document).on('click', '.remove-row', function(){
+                if($('#productTableBody tr').length > 1) {
+                    $(this).closest('tr').remove();
+                    updateRowCount();
+                    calculateTotals();
+                } else {
+                    alert("At least one product row is required.");
+                }
+            });
+            
+            // Calculate totals when inputs change
+            $(document).on('input', '.product-rate, .product-quantity, .product-tax', function(){
+                calculateRowTotal($(this).closest('tr'));
+                calculateTotals();
+            });
+            
+            // Calculate discount and net total
+            $("#totalDiscount").on('input', function(){
+                calculateNetTotal();
+            });
+            
+            // Calculate due amount
+            $("#paidAmount").on('input', function(){
+                calculateDueAmount();
+            });
+            
+            // Initialize row count
+            updateRowCount();
+        });
+        
+        function setCurrentDate() {
             var today = new Date();
-            document.getElementById("invdate1").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-            document.getElementById("invdate").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2); 
+            var formattedDate = today.getFullYear() + '-' + 
+                               ('0' + (today.getMonth() + 1)).slice(-2) + '-' + 
+                               ('0' + today.getDate()).slice(-2);
+            $("#invoiceDate").val(formattedDate);
         }
-     </script>
+        
+        function addProductRow() {
+            var rowCount = $('#productTableBody tr').length;
+            var newRow = `
+                <tr>
+                    <td data-label="Product Name">
+                        <input type="text" autocomplete="off" class="form-control" placeholder="Product name">
+                    </td>
+                    <td data-label="Product Size">
+                        <input type="text" autocomplete="off" class="form-control" placeholder="Size">
+                    </td>
+                    <td data-label="Product Rate">
+                        <input type="number" autocomplete="off" class="form-control product-rate" placeholder="0.00">
+                    </td>
+                    <td data-label="Product Quantity">
+                        <input type="number" autocomplete="off" class="form-control product-quantity" placeholder="0">
+                    </td>
+                    <td data-label="Product Tax(%)">
+                        <input type="number" autocomplete="off" class="form-control product-tax" placeholder="0">
+                    </td>
+                    <td data-label="Product Total">
+                        <input type="number" autocomplete="off" readonly class="form-control product-total" placeholder="0.00">
+                    </td>
+                    <td data-label="Action" class="no-print">
+                        <button class="btn btn-sm btn-danger remove-row">Remove</button>
+                    </td>
+                </tr>
+            `;
+            $("#productTableBody").append(newRow);
+            updateRowCount();
+        }
+        
+        function updateRowCount() {
+            var rowCount = $('#productTableBody tr').length;
+            $("#rowCount").html("Products: " + rowCount);
+        }
+        
+        function calculateRowTotal(row) {
+            var rate = parseFloat(row.find('.product-rate').val()) || 0;
+            var quantity = parseFloat(row.find('.product-quantity').val()) || 0;
+            var tax = parseFloat(row.find('.product-tax').val()) || 0;
+            
+            var subtotal = rate * quantity;
+            var taxAmount = subtotal * (tax / 100);
+            var total = subtotal + taxAmount;
+            
+            row.find('.product-total').val(total.toFixed(2));
+        }
+        
+        function calculateTotals() {
+            var totalAmount = 0;
+            
+            $('.product-total').each(function() {
+                totalAmount += parseFloat($(this).val()) || 0;
+            });
+            
+            $("#totalAmount").val(totalAmount.toFixed(2));
+            $("#netTotalAmount").val(totalAmount.toFixed(2));
+            calculateDueAmount();
+        }
+        
+        function calculateNetTotal() {
+            var totalAmount = parseFloat($("#totalAmount").val()) || 0;
+            var discount = parseFloat($("#totalDiscount").val()) || 0;
+            
+            var discountAmount = totalAmount * (discount / 100);
+            var netTotal = totalAmount - discountAmount;
+            
+            $("#netTotalAmount").val(netTotal.toFixed(2));
+            calculateDueAmount();
+        }
+        
+        function calculateDueAmount() {
+            var netTotal = parseFloat($("#netTotalAmount").val()) || 0;
+            var paidAmount = parseFloat($("#paidAmount").val()) || 0;
+            var dueAmount = netTotal - paidAmount;
+            
+            $("#dueAmount").val(dueAmount.toFixed(2));
+        }
+        
+        function resetForm() {
+            if(confirm("Are you sure you want to clear all data?")) {
+                // Clear customer information
+                $("#firstName, #middleName, #lastName, #mobileNumber, #previousDues").val("");
+                
+                // Clear product table except first row
+                $("#productTableBody").html(`
+                    <tr>
+                        <td data-label="Product Name">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Product name">
+                        </td>
+                        <td data-label="Product Size">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Size">
+                        </td>
+                        <td data-label="Product Rate">
+                            <input type="number" autocomplete="off" class="form-control product-rate" placeholder="0.00">
+                        </td>
+                        <td data-label="Product Quantity">
+                            <input type="number" autocomplete="off" class="form-control product-quantity" placeholder="0">
+                        </td>
+                        <td data-label="Product Tax(%)">
+                            <input type="number" autocomplete="off" class="form-control product-tax" placeholder="0">
+                        </td>
+                        <td data-label="Product Total">
+                            <input type="number" autocomplete="off" readonly class="form-control product-total" placeholder="0.00">
+                        </td>
+                        <td data-label="Action" class="no-print">
+                            <button class="btn btn-sm btn-danger remove-row">Remove</button>
+                        </td>
+                    </tr>
+                `);
+                
+                // Clear summary section
+                $("#totalAmount, #totalDiscount, #netTotalAmount, #paidAmount, #dueAmount").val("");
+                $("#paymentType").val("Cash");
+                
+                // Reset date and update row count
+                setCurrentDate();
+                updateRowCount();
+            }
+        }
+        
+        function saveInvoice() {
+            // Validate required fields
+            if(!$("#firstName").val() || !$("#lastName").val()) {
+                alert("Please enter customer name");
+                return;
+            }
+            
+            // Here you would typically send data to server
+            // For demo purposes, we'll just show a success message
+            alert("Invoice saved successfully!");
+            
+            // Generate new invoice number (in a real app, this would come from the server)
+            var newInvoiceNo = "INV-" + new Date().getFullYear() + "-" + 
+                              (Math.floor(Math.random() * 9000) + 1000);
+            $("#invoiceNumber").val(newInvoiceNo);
+        }
+        
+        function printInvoice() {
+            // Populate print section with current data
+            $("#printInvoiceNumber").text("Invoice #: " + $("#invoiceNumber").val());
+            $("#printInvoiceDate").text("Date: " + $("#invoiceDate").val());
+            
+            var customerName = $("#firstName").val() + " " + 
+                              ($("#middleName").val() ? $("#middleName").val() + " " : "") + 
+                              $("#lastName").val();
+            $("#printCustomerName").text(customerName);
+            $("#printCustomerMobile").text("Mobile: " + $("#mobileNumber").val());
+            
+            // Add product rows to print table
+            var printProductTable = $("#printProductTable");
+            printProductTable.empty();
+            
+            $("#productTableBody tr").each(function() {
+                var productName = $(this).find('td:eq(0) input').val();
+                var productSize = $(this).find('td:eq(1) input').val();
+                var productRate = $(this).find('td:eq(2) input').val();
+                var productQuantity = $(this).find('td:eq(3) input').val();
+                var productTax = $(this).find('td:eq(4) input').val();
+                var productTotal = $(this).find('td:eq(5) input').val();
+                
+                if(productName || productRate || productQuantity) {
+                    var row = `<tr>
+                        <td>${productName || "-"}</td>
+                        <td>${productSize || "-"}</td>
+                        <td>${productRate || "0.00"}</td>
+                        <td>${productQuantity || "0"}</td>
+                        <td>${productTax || "0"}</td>
+                        <td>${productTotal || "0.00"}</td>
+                    </tr>`;
+                    printProductTable.append(row);
+                }
+            });
+            
+            // Add summary to print section
+            $("#printTotalAmount").text($("#totalAmount").val() || "0.00");
+            
+            var discount = $("#totalDiscount").val() || "0";
+            var totalAmount = parseFloat($("#totalAmount").val()) || 0;
+            var discountAmount = totalAmount * (parseFloat(discount) / 100);
+            $("#printDiscount").text(discountAmount.toFixed(2));
+            
+            $("#printNetTotal").text($("#netTotalAmount").val() || "0.00");
+            $("#printPaidAmount").text($("#paidAmount").val() || "0.00");
+            $("#printDueAmount").text($("#dueAmount").val() || "0.00");
+            
+            // Show print section and trigger print
+            $("#print-section").show();
+            window.print();
+            $("#print-section").hide();
+        }
+    </script>
 </body>
 </html>
